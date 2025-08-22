@@ -1,0 +1,4 @@
+wxPython
+google-genai
+keyboard
+pywin32
