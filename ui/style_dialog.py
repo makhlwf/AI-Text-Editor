@@ -9,7 +9,7 @@ class StyleDialog(wx.Dialog):
         self.radio_box = wx.RadioBox(
             self.panel, 
             label="Choose a style", 
-            choices=["Formal", "Casual", "Professional", "Creative"],
+            choices=["Formal", "Casual", "Professional", "Creative", "Polite", "Funny", "Social post"],
             majorDimension=1, 
             style=wx.RA_SPECIFY_COLS
         )
