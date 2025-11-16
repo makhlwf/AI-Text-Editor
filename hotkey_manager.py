@@ -2,6 +2,7 @@ import keyboard
 import threading
 import config_manager
 
+
 class HotkeyManager(threading.Thread):
     def __init__(self, callback):
         super(HotkeyManager, self).__init__()
@@ -11,7 +12,7 @@ class HotkeyManager(threading.Thread):
         self._stop_event = threading.Event()
 
     def run(self):
-        shortcut = self.config.get('shortcut', 'ctrl+alt+x')
+        shortcut = self.config.get("shortcut", "ctrl+alt+x")
         keyboard.add_hotkey(shortcut, self.callback)
         self._stop_event.wait()
 

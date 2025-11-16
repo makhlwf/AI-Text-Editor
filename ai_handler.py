@@ -1,10 +1,12 @@
 import google.generativeai as genai
 import config_manager
 
+
 class AIHandler:
     def __init__(self):
         self.config = config_manager.get_config()
-        self.api_key = self.config.get('api_key')
+        self.api_key = self.config.get("api_key")
+        self.model = self.config.get("model")
         if self.api_key:
             genai.configure(api_key=self.api_key)
 
@@ -13,7 +15,7 @@ class AIHandler:
             return "API key not found. Please set it in the settings."
 
         try:
-            model = genai.GenerativeModel('gemini-2.5-flash-lite')
+            model = genai.GenerativeModel(self.model)
             full_prompt = f"{prompt}:\n\n{text}"
             response = model.generate_content(full_prompt)
             # Combine text from all parts of the response
@@ -33,4 +35,3 @@ class AIHandler:
     def direct_instruction(self, text, instruction):
         prompt = f"{instruction}. Only return the modified text, without any other comments. Keep the original language."
         return self.generate_text(prompt, text)
-

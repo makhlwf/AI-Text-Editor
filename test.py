@@ -1,6 +1,6 @@
 import wx
 import main
-import time
+
 
 class TestFrame(wx.Frame):
     def __init__(self):
@@ -11,6 +11,7 @@ class TestFrame(wx.Frame):
         sizer.Add(self.text_ctrl, 1, wx.EXPAND)
         self.panel.SetSizer(sizer)
         self.text_ctrl.SetValue("This is some test text.")
+
 
 class TestApp(wx.App):
     def OnInit(self):
@@ -34,7 +35,7 @@ class TestApp(wx.App):
             self.main_app.process_text(text_to_process, 0)
 
             # 2. Check the text in the control after the operation
-            wx.CallLater(5000, self.check_result) # Wait for AI response
+            wx.CallLater(5000, self.check_result)  # Wait for AI response
 
         except Exception as e:
             print(f"An error occurred during the test: {e}")
@@ -49,7 +50,8 @@ class TestApp(wx.App):
         self.main_app.taskBarIcon.on_exit(None)
         wx.GetApp().Exit()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     print("Please ensure you have set your Gemini API key in the settings.")
     app = TestApp()
     app.MainLoop()

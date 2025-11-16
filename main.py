@@ -9,8 +9,9 @@ from text_extractor import TextExtractor
 from ai_handler import AIHandler
 import threading
 
-TRAY_TOOLTIP = 'AI Text Editor'
-TRAY_ICON = 'icon.png'
+TRAY_TOOLTIP = "AI Text Editor"
+TRAY_ICON = "icon.png"
+
 
 class MainApp(wx.App):
     def OnInit(self):
@@ -31,39 +32,41 @@ class MainApp(wx.App):
         # This method runs on the main GUI thread.
         text, hwnd, start_sel, end_sel = self.text_extractor.get_focused_text_and_hwnd()
         if not text or not hwnd:
-            self.taskBarIcon.ShowBalloon("AI Text Editor", "No text found in the focused window.")
+            self.taskBarIcon.ShowBalloon(
+                "AI Text Editor", "No text found in the focused window."
+            )
             return
 
         options_dialog = ui.options_dialog.OptionsDialog(self.frame)
         if options_dialog.ShowModal() != wx.ID_OK:
             options_dialog.Destroy()
             return
-        
+
         choice = options_dialog.get_choice()
         options_dialog.Destroy()
 
         params = {
-            'text': text,
-            'hwnd': hwnd,
-            'choice': choice,
-            'start_sel': start_sel,
-            'end_sel': end_sel
+            "text": text,
+            "hwnd": hwnd,
+            "choice": choice,
+            "start_sel": start_sel,
+            "end_sel": end_sel,
         }
 
-        if choice == 1: # Change Style
+        if choice == 1:  # Change Style
             style_dialog = ui.style_dialog.StyleDialog(self.frame)
             if style_dialog.ShowModal() != wx.ID_OK:
                 style_dialog.Destroy()
                 return
-            params['style'] = style_dialog.get_style()
+            params["style"] = style_dialog.get_style()
             style_dialog.Destroy()
 
-        elif choice == 2: # Direct Instruction
+        elif choice == 2:  # Direct Instruction
             instruction_dialog = ui.instruction_dialog.InstructionDialog(self.frame)
             if instruction_dialog.ShowModal() != wx.ID_OK:
                 instruction_dialog.Destroy()
                 return
-            params['instruction'] = instruction_dialog.get_instruction()
+            params["instruction"] = instruction_dialog.get_instruction()
             instruction_dialog.Destroy()
 
         # All user input is gathered, now start the worker thread.
@@ -73,37 +76,48 @@ class MainApp(wx.App):
         try:
             wx.CallAfter(self.show_processing_message)
             new_text = None
-            choice = params['choice']
-            text = params['text']
-            hwnd = params['hwnd']
-            start_sel = params['start_sel']
-            end_sel = params['end_sel']
+            choice = params["choice"]
+            text = params["text"]
+            hwnd = params["hwnd"]
+            start_sel = params["start_sel"]
+            end_sel = params["end_sel"]
 
             print(f"--- Sending to AI ---\n{text}\n---------------------")
 
-            if choice == 0: # Fix Grammar
+            if choice == 0:  # Fix Grammar
                 new_text = self.ai_handler.fix_grammar(text)
-            elif choice == 1: # Change Style
-                new_text = self.ai_handler.change_style(text, params['style'])
-            elif choice == 2: # Direct Instruction
-                new_text = self.ai_handler.direct_instruction(text, params['instruction'])
+            elif choice == 1:  # Change Style
+                new_text = self.ai_handler.change_style(text, params["style"])
+            elif choice == 2:  # Direct Instruction
+                new_text = self.ai_handler.direct_instruction(
+                    text, params["instruction"]
+                )
 
             print(f"--- Received from AI ---\n{new_text}\n----------------------")
 
             if new_text:
-                wx.CallAfter(self.text_extractor.set_text_in_control, hwnd, new_text, start_sel, end_sel)
+                wx.CallAfter(
+                    self.text_extractor.set_text_in_control,
+                    hwnd,
+                    new_text,
+                    start_sel,
+                    end_sel,
+                )
         except Exception as e:
             print(f"Error in background thread: {e}")
         finally:
             wx.CallAfter(self.hide_processing_message)
 
     def show_processing_message(self):
-        self.progress_dialog = wx.ProgressDialog("Processing...", "Please wait.", style=wx.PD_APP_MODAL | wx.PD_AUTO_HIDE)
+        self.progress_dialog = wx.ProgressDialog(
+            "Processing...", "Please wait.", style=wx.PD_APP_MODAL | wx.PD_AUTO_HIDE
+        )
         self.progress_dialog.Pulse()
 
     def hide_processing_message(self):
-        if hasattr(self, 'progress_dialog') and self.progress_dialog:
+        if hasattr(self, "progress_dialog") and self.progress_dialog:
             self.progress_dialog.Destroy()
+
 
 class TaskBarIcon(wx.adv.TaskBarIcon):
     def __init__(self, frame):
@@ -143,6 +157,7 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
         wx.CallAfter(self.Destroy)
         self.frame.Close()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = MainApp()
     app.MainLoop()

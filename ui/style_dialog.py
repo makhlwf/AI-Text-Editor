@@ -1,5 +1,6 @@
 import wx
 
+
 class StyleDialog(wx.Dialog):
     def __init__(self, parent):
         super(StyleDialog, self).__init__(parent, title="Change Style")
@@ -7,11 +8,19 @@ class StyleDialog(wx.Dialog):
         self.main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         self.radio_box = wx.RadioBox(
-            self.panel, 
-            label="Choose a style", 
-            choices=["Formal", "Casual", "Professional", "Creative", "Polite", "Funny", "Social post"],
-            majorDimension=1, 
-            style=wx.RA_SPECIFY_COLS
+            self.panel,
+            label="Choose a style",
+            choices=[
+                "Formal",
+                "Casual",
+                "Professional",
+                "Creative",
+                "Polite",
+                "Funny",
+                "Social post",
+            ],
+            majorDimension=1,
+            style=wx.RA_SPECIFY_COLS,
         )
 
         self.main_sizer.Add(self.radio_box, 0, wx.ALL, 10)

@@ -6,6 +6,7 @@ import ctypes
 import win32clipboard
 import time
 
+
 class TextExtractor:
     def get_focused_text_and_hwnd(self):
         try:
@@ -17,9 +18,13 @@ class TextExtractor:
                 foreground_thread_id = result
             current_thread_id = win32api.GetCurrentThreadId()
 
-            win32process.AttachThreadInput(current_thread_id, foreground_thread_id, True)
+            win32process.AttachThreadInput(
+                current_thread_id, foreground_thread_id, True
+            )
             focused_ctrl_hwnd = win32gui.GetFocus()
-            win32process.AttachThreadInput(current_thread_id, foreground_thread_id, False)
+            win32process.AttachThreadInput(
+                current_thread_id, foreground_thread_id, False
+            )
 
             if not focused_ctrl_hwnd:
                 return None, None, None, None
@@ -30,14 +35,18 @@ class TextExtractor:
             end_sel = sel >> 16
 
             text = None
-            if start_sel != end_sel: # Text is selected
-                buff_len = win32api.SendMessage(focused_ctrl_hwnd, win32con.WM_GETTEXTLENGTH, 0, 0)
+            if start_sel != end_sel:  # Text is selected
+                buff_len = win32api.SendMessage(
+                    focused_ctrl_hwnd, win32con.WM_GETTEXTLENGTH, 0, 0
+                )
                 if buff_len > 0:
                     buffer = ctypes.create_unicode_buffer(buff_len + 1)
-                    win32api.SendMessage(focused_ctrl_hwnd, win32con.WM_GETTEXT, buff_len + 1, buffer)
+                    win32api.SendMessage(
+                        focused_ctrl_hwnd, win32con.WM_GETTEXT, buff_len + 1, buffer
+                    )
                     text = buffer.value[start_sel:end_sel]
                 return text, focused_ctrl_hwnd, start_sel, end_sel
-            else: # No text selected, get full text
+            else:  # No text selected, get full text
                 full_text = self.get_full_text(focused_ctrl_hwnd)
                 if full_text:
                     return full_text, focused_ctrl_hwnd, 0, len(full_text)
@@ -77,7 +86,9 @@ class TextExtractor:
             try:
                 win32clipboard.OpenClipboard()
                 if win32clipboard.IsClipboardFormatAvailable(win32con.CF_UNICODETEXT):
-                    original_clipboard_content = win32clipboard.GetClipboardData(win32con.CF_UNICODETEXT)
+                    original_clipboard_content = win32clipboard.GetClipboardData(
+                        win32con.CF_UNICODETEXT
+                    )
             finally:
                 win32clipboard.CloseClipboard()
 
@@ -99,7 +110,9 @@ class TextExtractor:
                 win32clipboard.OpenClipboard()
                 win32clipboard.EmptyClipboard()
                 if original_clipboard_content is not None:
-                    win32clipboard.SetClipboardData(win32con.CF_UNICODETEXT, original_clipboard_content)
+                    win32clipboard.SetClipboardData(
+                        win32con.CF_UNICODETEXT, original_clipboard_content
+                    )
             finally:
                 win32clipboard.CloseClipboard()
 

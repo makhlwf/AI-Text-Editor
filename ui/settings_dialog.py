@@ -1,6 +1,7 @@
 import wx
 import config_manager
 
+
 class SettingsDialog(wx.Dialog):
     def __init__(self, parent):
         super(SettingsDialog, self).__init__(parent, title="Settings")
@@ -10,14 +11,24 @@ class SettingsDialog(wx.Dialog):
         self.main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         api_key_label = wx.StaticText(self.panel, label="Gemini API Key:")
-        self.api_key_ctrl = wx.TextCtrl(self.panel, value=self.config.get('api_key', ''), style=wx.TE_PASSWORD)
+        self.api_key_ctrl = wx.TextCtrl(
+            self.panel, value=self.config.get("api_key", ""), style=wx.TE_PASSWORD
+        )
         shortcut_label = wx.StaticText(self.panel, label="Shortcut:")
-        self.shortcut_ctrl = wx.TextCtrl(self.panel, value=self.config.get('shortcut', 'ctrl+alt+x'))
+        self.shortcut_ctrl = wx.TextCtrl(
+            self.panel, value=self.config.get("shortcut", "ctrl+alt+x")
+        )
+        model_label = wx.StaticText(self.panel, label="Model:")
+        self.model_ctrl = wx.TextCtrl(
+            self.panel, value=self.config.get("model", "gemini-pro")
+        )
 
         self.main_sizer.Add(api_key_label, 0, wx.ALL, 5)
-        self.main_sizer.Add(self.api_key_ctrl, 0, wx.EXPAND|wx.ALL, 5)
+        self.main_sizer.Add(self.api_key_ctrl, 0, wx.EXPAND | wx.ALL, 5)
         self.main_sizer.Add(shortcut_label, 0, wx.ALL, 5)
-        self.main_sizer.Add(self.shortcut_ctrl, 0, wx.EXPAND|wx.ALL, 5)
+        self.main_sizer.Add(self.shortcut_ctrl, 0, wx.EXPAND | wx.ALL, 5)
+        self.main_sizer.Add(model_label, 0, wx.ALL, 5)
+        self.main_sizer.Add(self.model_ctrl, 0, wx.EXPAND | wx.ALL, 5)
 
         btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
         ok_button = wx.Button(self.panel, wx.ID_OK, "OK")
@@ -32,7 +43,8 @@ class SettingsDialog(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.on_ok, id=wx.ID_OK)
 
     def on_ok(self, event):
-        self.config['api_key'] = self.api_key_ctrl.GetValue()
-        self.config['shortcut'] = self.shortcut_ctrl.GetValue()
+        self.config["api_key"] = self.api_key_ctrl.GetValue()
+        self.config["shortcut"] = self.shortcut_ctrl.GetValue()
+        self.config["model"] = self.model_ctrl.GetValue()
         config_manager.save_config(self.config)
         self.EndModal(wx.ID_OK)

@@ -1,5 +1,6 @@
 import wx
 
+
 class OptionsDialog(wx.Dialog):
     def __init__(self, parent):
         super(OptionsDialog, self).__init__(parent, title="AI Text Editor")
@@ -7,11 +8,11 @@ class OptionsDialog(wx.Dialog):
         self.main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         self.radio_box = wx.RadioBox(
-            self.panel, 
-            label="Choose an option", 
+            self.panel,
+            label="Choose an option",
             choices=["Fix Grammar", "Change Style", "Direct Instruction"],
-            majorDimension=1, 
-            style=wx.RA_SPECIFY_COLS
+            majorDimension=1,
+            style=wx.RA_SPECIFY_COLS,
         )
 
         self.main_sizer.Add(self.radio_box, 0, wx.ALL, 10)
