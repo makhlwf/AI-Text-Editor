@@ -2,3 +2,4 @@ wxPython
 google-genai
 keyboard
 pywin32
+ollama

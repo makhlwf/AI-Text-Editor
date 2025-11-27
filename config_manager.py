@@ -9,12 +9,18 @@ def get_config():
         return {
             "api_key": "",
             "shortcut": "ctrl+alt+x",
-            "model": "gemini-2.5-flash-lite",
+            "model": "gemini-1.5-flash-latest",
+            "ai_provider": "gemini",
+            "ollama_model": "gemma3",
         }
     with open(CONFIG_FILE, "r") as f:
         config = json.load(f)
         if "model" not in config:
-            config["model"] = "gemini-2.5-flash-lite"
+            config["model"] = "gemini-1.5-flash-latest"
+        if "ai_provider" not in config:
+            config["ai_provider"] = "gemini"
+        if "ollama_model" not in config:
+            config["ollama_model"] = "gemma3"
         return config
 
 
