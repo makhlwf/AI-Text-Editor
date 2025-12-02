@@ -1,3 +1,6 @@
+# this app is a work in progress
+Its not readdy for full use.
+
 # AI Text Editor
 
 AI Text Editor is a Windows application that brings the power of AI to any text field on your system. With a simple hotkey, you can instantly fix grammar, change the writing style of your text, or give it a direct instruction.
@@ -44,10 +47,7 @@ The configuration is saved in `%APPDATA%\AITextEditor\config.json`.
 
 ## Dependencies
 
-*   [wxPython](https://wxpython.org/)
-*   [google-genai](https://pypi.org/project/google-genai/)
-*   [keyboard](https://pypi.org/project/keyboard/)
-*   [pywin32](https://pypi.org/project/pywin32/)
+look in requirements.txt file for an uptodated list
 
 ## Disclaimer
 
