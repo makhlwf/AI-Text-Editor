@@ -1,5 +1,6 @@
 wxPython
-google-genai
+google-generativeai
 keyboard
 pywin32
 ollama
+uiautomation
