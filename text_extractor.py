@@ -5,7 +5,7 @@ import win32process
 import win32clipboard
 import ctypes
 import time
-import uiautomation as auto  # pip install uiautomation
+import uiautomation as auto
 
 
 class TextExtractor:
