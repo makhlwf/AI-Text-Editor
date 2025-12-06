@@ -1,0 +1,16 @@
+[project]
+name = "ai-text-editor"
+version = "0.1.0"
+description = "Ai text editor"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-generativeai>=0.8.5",
+    "keyboard>=0.13.5",
+    "ollama>=0.6.1",
+    "pillow>=12.0.0",
+    "pyinstaller>=6.17.0",
+    "pywin32>=311",
+    "uiautomation>=2.0.29",
+    "wxpython>=4.2.4",
+]

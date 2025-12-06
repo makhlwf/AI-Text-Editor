@@ -8,9 +8,17 @@ import hotkey_manager
 from text_extractor import TextExtractor
 from ai_handler import AIHandler
 import threading
+import os, sys
+
+
+def resource_path(relative_path):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
 
 TRAY_TOOLTIP = "AI Text Editor"
-TRAY_ICON = "icon.png"
+TRAY_ICON = resource_path("icon.png")
 
 
 class MainApp(wx.App):
