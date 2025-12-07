@@ -1,0 +1,164 @@
+# English translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-12-07 16:37+0200\n"
+"PO-Revision-Date: 2025-12-07 16:32+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ai_handler.py:20
+msgid "API key not found. Please set it in the settings."
+msgstr ""
+
+#: ai_handler.py:46
+msgid "Invalid AI provider selected."
+msgstr ""
+
+#: ai_handler.py:49
+msgid ""
+"Fix the grammar and structure of the following text. Only return the "
+"corrected text, without any other comments. Keep the original language."
+msgstr ""
+
+#: main.py:50 main.py:74 ui/options_dialog.py:7
+msgid "AI Text Editor"
+msgstr ""
+
+#: main.py:74
+msgid "No text found in the focused window."
+msgstr ""
+
+#: main.py:151
+msgid "Processing..."
+msgstr ""
+
+#: main.py:151
+msgid "Please wait."
+msgstr ""
+
+#: main.py:169 ui/settings_dialog.py:8
+msgid "Settings"
+msgstr ""
+
+#: main.py:171
+msgid "Exit"
+msgstr ""
+
+#: main.py:198
+msgid "Language changed. Please restart the application for full effect."
+msgstr ""
+
+#: main.py:198
+msgid "Restart Required"
+msgstr ""
+
+#: ui/instruction_dialog.py:7 ui/options_dialog.py:14
+msgid "Direct Instruction"
+msgstr ""
+
+#: ui/instruction_dialog.py:11
+msgid "Enter your instruction:"
+msgstr ""
+
+#: ui/instruction_dialog.py:18 ui/options_dialog.py:22 ui/settings_dialog.py:80
+#: ui/style_dialog.py:30
+msgid "OK"
+msgstr ""
+
+#: ui/instruction_dialog.py:19 ui/options_dialog.py:23 ui/settings_dialog.py:81
+#: ui/style_dialog.py:31
+msgid "Cancel"
+msgstr ""
+
+#: ui/options_dialog.py:13
+msgid "Choose an option"
+msgstr ""
+
+#: ui/options_dialog.py:14
+msgid "Fix Grammar"
+msgstr ""
+
+#: ui/options_dialog.py:14 ui/style_dialog.py:7
+msgid "Change Style"
+msgstr ""
+
+#: ui/settings_dialog.py:15
+msgid "AI Provider:"
+msgstr ""
+
+#: ui/settings_dialog.py:27
+msgid "Gemini Settings"
+msgstr ""
+
+#: ui/settings_dialog.py:29
+msgid "Gemini API Key:"
+msgstr ""
+
+#: ui/settings_dialog.py:33 ui/settings_dialog.py:47
+msgid "Model:"
+msgstr ""
+
+#: ui/settings_dialog.py:45
+msgid "Ollama Settings"
+msgstr ""
+
+#: ui/settings_dialog.py:56
+msgid "Language:"
+msgstr ""
+
+#: ui/settings_dialog.py:57 ui/settings_dialog.py:58 ui/settings_dialog.py:61
+msgid "English"
+msgstr ""
+
+#: ui/settings_dialog.py:57 ui/settings_dialog.py:58
+msgid "Spanish"
+msgstr ""
+
+#: ui/settings_dialog.py:72
+msgid "Shortcut:"
+msgstr ""
+
+#: ui/style_dialog.py:13
+msgid "Choose a style"
+msgstr ""
+
+#: ui/style_dialog.py:15
+msgid "Formal"
+msgstr ""
+
+#: ui/style_dialog.py:16
+msgid "Casual"
+msgstr ""
+
+#: ui/style_dialog.py:17
+msgid "Professional"
+msgstr ""
+
+#: ui/style_dialog.py:18
+msgid "Creative"
+msgstr ""
+
+#: ui/style_dialog.py:19
+msgid "Polite"
+msgstr ""
+
+#: ui/style_dialog.py:20
+msgid "Funny"
+msgstr ""
+
+#: ui/style_dialog.py:21
+msgid "Social post"
+msgstr ""
+

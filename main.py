@@ -8,7 +8,34 @@ import hotkey_manager
 from text_extractor import TextExtractor
 from ai_handler import AIHandler
 import threading
-import os, sys
+import os
+import sys
+import gettext
+import locale
+import config_manager
+
+# Global variables for gettext
+LOCALE_DIR = None
+_ = None
+
+
+def set_translation_globals(language):
+    global LOCALE_DIR, _
+
+    # Set the locale based on config
+    try:
+        locale.setlocale(locale.LC_ALL, language + ".UTF-8")
+    except locale.Error:
+        try:
+            locale.setlocale(locale.LC_ALL, language)
+        except locale.Error:
+            print(f"Warning: Could not set locale to {language}")
+
+    # Setup gettext
+    LOCALE_DIR = resource_path("locales")
+    translator = gettext.translation("messages", LOCALE_DIR, languages=[language])
+    translator.install()
+    _ = translator.gettext
 
 
 def resource_path(relative_path):
@@ -17,7 +44,12 @@ def resource_path(relative_path):
     return os.path.join(os.path.abspath("."), relative_path)
 
 
-TRAY_TOOLTIP = "AI Text Editor"
+# Initial setup of translation globals
+config = config_manager.get_config()
+set_translation_globals(config.get("language", "en"))
+
+
+TRAY_TOOLTIP = _("AI Text Editor")
 TRAY_ICON = resource_path("icon.png")
 
 
@@ -28,7 +60,7 @@ class MainApp(wx.App):
         self.hotkey_manager = hotkey_manager.HotkeyManager(self.on_hotkey)
         self.hotkey_manager.start()
         self.text_extractor = TextExtractor()
-        self.ai_handler = AIHandler()
+        self.ai_handler = AIHandler(_)
         return True
 
     def on_hotkey(self):
@@ -41,11 +73,11 @@ class MainApp(wx.App):
         text, hwnd, start_sel, end_sel = self.text_extractor.get_focused_text_and_hwnd()
         if not text or not hwnd:
             self.taskBarIcon.ShowBalloon(
-                "AI Text Editor", "No text found in the focused window."
+                _("AI Text Editor"), _("No text found in the focused window.")
             )
             return
 
-        options_dialog = ui.options_dialog.OptionsDialog(self.frame)
+        options_dialog = ui.options_dialog.OptionsDialog(self.frame, _)
         if options_dialog.ShowModal() != wx.ID_OK:
             options_dialog.Destroy()
             return
@@ -62,7 +94,7 @@ class MainApp(wx.App):
         }
 
         if choice == 1:  # Change Style
-            style_dialog = ui.style_dialog.StyleDialog(self.frame)
+            style_dialog = ui.style_dialog.StyleDialog(self.frame, _)
             if style_dialog.ShowModal() != wx.ID_OK:
                 style_dialog.Destroy()
                 return
@@ -70,7 +102,7 @@ class MainApp(wx.App):
             style_dialog.Destroy()
 
         elif choice == 2:  # Direct Instruction
-            instruction_dialog = ui.instruction_dialog.InstructionDialog(self.frame)
+            instruction_dialog = ui.instruction_dialog.InstructionDialog(self.frame, _)
             if instruction_dialog.ShowModal() != wx.ID_OK:
                 instruction_dialog.Destroy()
                 return
@@ -118,7 +150,9 @@ class MainApp(wx.App):
 
     def show_processing_message(self):
         self.progress_dialog = wx.ProgressDialog(
-            "Processing...", "Please wait.", style=wx.PD_APP_MODAL | wx.PD_AUTO_HIDE
+            _("Processing..."),
+            _("Please wait."),
+            style=wx.PD_APP_MODAL | wx.PD_AUTO_HIDE,
         )
         self.progress_dialog.Pulse()
 
@@ -136,9 +170,9 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
 
     def CreatePopupMenu(self):
         menu = wx.Menu()
-        menu.Append(wx.ID_ABOUT, "Settings")
+        menu.Append(wx.ID_ABOUT, _("Settings"))
         menu.AppendSeparator()
-        menu.Append(wx.ID_EXIT, "Exit")
+        menu.Append(wx.ID_EXIT, _("Exit"))
         self.Bind(wx.EVT_MENU, self.on_settings, id=wx.ID_ABOUT)
         self.Bind(wx.EVT_MENU, self.on_exit, id=wx.ID_EXIT)
         return menu
@@ -151,13 +185,28 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
         print("Tray icon left-clicked.")
 
     def on_settings(self, event):
-        settings_dialog = ui.settings_dialog.SettingsDialog(self.frame)
+        settings_dialog = ui.settings_dialog.SettingsDialog(self.frame, _)
         if settings_dialog.ShowModal() == wx.ID_OK:
             app = wx.GetApp()
             app.hotkey_manager.stop()
             app.hotkey_manager = hotkey_manager.HotkeyManager(app.on_hotkey)
             app.hotkey_manager.start()
-            app.ai_handler = AIHandler()
+            app.ai_handler = AIHandler(_)
+
+            # Reload translations and update UI if language changed
+            new_config = config_manager.get_config()
+            if new_config["language"] != config["language"]:
+                set_translation_globals(new_config["language"])
+                # Re-create the main frame or update all translatable strings
+                # For simplicity, we'll recreate the entire app for now.
+                wx.MessageBox(
+                    _(
+                        "Language changed. Please restart the application for full effect."
+                    ),
+                    _("Restart Required"),
+                    wx.OK | wx.ICON_INFORMATION,
+                )
+                self.frame.Close()
         settings_dialog.Destroy()
 
     def on_exit(self, event):

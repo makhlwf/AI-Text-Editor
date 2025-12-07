@@ -12,6 +12,7 @@ def get_config():
             "model": "gemini-1.5-flash-latest",
             "ai_provider": "gemini",
             "ollama_model": "gemma3",
+            "language": "en",
         }
     with open(CONFIG_FILE, "r") as f:
         config = json.load(f)
@@ -21,6 +22,8 @@ def get_config():
             config["ai_provider"] = "gemini"
         if "ollama_model" not in config:
             config["ollama_model"] = "gemma3"
+        if "language" not in config:
+            config["language"] = "en"
         return config
 
 

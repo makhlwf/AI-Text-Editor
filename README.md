@@ -52,3 +52,35 @@ look in requirements.txt file for an uptodated list
 ## Disclaimer
 
 This application sends your selected text to the Google AI API to provide its features. Please be mindful of the data you are sending and ensure you are not violating any privacy policies or terms of service.
+
+## Translations
+
+This application supports multiple languages. You can change the language in the settings menu.
+
+### How to Add a New Language
+
+If you would like to contribute by adding a new language, follow these steps:
+
+1.  **Add the language to the settings dialog:**
+    *   Open `ui/settings_dialog.py`.
+    *   Add the new language to `self.language_map` and `self.reverse_language_map`. Use the two-letter ISO 639-1 code for the language.
+
+2.  **Generate the `.po` file:**
+    *   Open a terminal in the root directory of the project.
+    *   Run the following command, replacing `[lang]` with the two-letter language code:
+        ```
+        pybabel init -i locales/messages.pot -d locales -l [lang]
+        ```
+
+3.  **Translate the text:**
+    *   Open the newly created `.po` file at `locales/[lang]/LC_MESSAGES/messages.po`.
+    *   For each `msgid`, add the translation in the `msgstr` field.
+
+4.  **Compile the translations:**
+    *   Run the following command in the terminal:
+        ```
+        pybabel compile -d locales
+        ```
+
+5.  **Submit a pull request:**
+    *   Once you have completed the translation, please submit a pull request with your changes.

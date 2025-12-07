@@ -3,15 +3,16 @@ import config_manager
 
 
 class SettingsDialog(wx.Dialog):
-    def __init__(self, parent):
-        super(SettingsDialog, self).__init__(parent, title="Settings")
+    def __init__(self, parent, _):
+        self._ = _
+        super(SettingsDialog, self).__init__(parent, title=self._("Settings"))
         self.config = config_manager.get_config()
 
         self.panel = wx.Panel(self)
         self.main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # AI Provider
-        provider_label = wx.StaticText(self.panel, label="AI Provider:")
+        provider_label = wx.StaticText(self.panel, label=self._("AI Provider:"))
         self.provider_combo = wx.ComboBox(
             self.panel,
             choices=["gemini", "ollama"],
@@ -23,13 +24,13 @@ class SettingsDialog(wx.Dialog):
 
         # Gemini Settings
         self.gemini_settings_sizer = wx.StaticBoxSizer(
-            wx.StaticBox(self.panel, label="Gemini Settings"), wx.VERTICAL
+            wx.StaticBox(self.panel, label=self._("Gemini Settings")), wx.VERTICAL
         )
-        api_key_label = wx.StaticText(self.panel, label="Gemini API Key:")
+        api_key_label = wx.StaticText(self.panel, label=self._("Gemini API Key:"))
         self.api_key_ctrl = wx.TextCtrl(
             self.panel, value=self.config.get("api_key", ""), style=wx.TE_PASSWORD
         )
-        model_label = wx.StaticText(self.panel, label="Model:")
+        model_label = wx.StaticText(self.panel, label=self._("Model:"))
         self.model_ctrl = wx.TextCtrl(
             self.panel, value=self.config.get("model", "gemini-pro")
         )
@@ -41,9 +42,9 @@ class SettingsDialog(wx.Dialog):
 
         # Ollama Settings
         self.ollama_settings_sizer = wx.StaticBoxSizer(
-            wx.StaticBox(self.panel, label="Ollama Settings"), wx.VERTICAL
+            wx.StaticBox(self.panel, label=self._("Ollama Settings")), wx.VERTICAL
         )
-        ollama_model_label = wx.StaticText(self.panel, label="Model:")
+        ollama_model_label = wx.StaticText(self.panel, label=self._("Model:"))
         self.ollama_model_ctrl = wx.TextCtrl(
             self.panel, value=self.config.get("ollama_model", "gemma3")
         )
@@ -51,7 +52,34 @@ class SettingsDialog(wx.Dialog):
         self.ollama_settings_sizer.Add(self.ollama_model_ctrl, 0, wx.EXPAND | wx.ALL, 5)
         self.main_sizer.Add(self.ollama_settings_sizer, 0, wx.EXPAND | wx.ALL, 5)
 
-        shortcut_label = wx.StaticText(self.panel, label="Shortcut:")
+        # Language Selection
+        language_label = wx.StaticText(self.panel, label=self._("Language:"))
+        self.language_map = {
+            "en": self._("English"),
+            "es": self._("Spanish"),
+            "ar": self._("Arabic"),
+        }
+        self.reverse_language_map = {
+            self._("English"): "en",
+            self._("Spanish"): "es",
+            self._("Arabic"): "ar",
+        }
+
+        current_lang_code = self.config.get("language", "en")
+        current_lang_display = self.language_map.get(
+            current_lang_code, self._("English")
+        )
+
+        self.language_combo = wx.ComboBox(
+            self.panel,
+            choices=list(self.language_map.values()),
+            value=current_lang_display,
+            style=wx.CB_READONLY,
+        )
+        self.main_sizer.Add(language_label, 0, wx.ALL, 5)
+        self.main_sizer.Add(self.language_combo, 0, wx.EXPAND | wx.ALL, 5)
+
+        shortcut_label = wx.StaticText(self.panel, label=self._("Shortcut:"))
         self.shortcut_ctrl = wx.TextCtrl(
             self.panel, value=self.config.get("shortcut", "ctrl+alt+x")
         )
@@ -59,8 +87,8 @@ class SettingsDialog(wx.Dialog):
         self.main_sizer.Add(self.shortcut_ctrl, 0, wx.EXPAND | wx.ALL, 5)
 
         btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
-        ok_button = wx.Button(self.panel, wx.ID_OK, "OK")
-        cancel_button = wx.Button(self.panel, wx.ID_CANCEL, "Cancel")
+        ok_button = wx.Button(self.panel, wx.ID_OK, self._("OK"))
+        cancel_button = wx.Button(self.panel, wx.ID_CANCEL, self._("Cancel"))
         btn_sizer.Add(ok_button, 0, wx.ALL, 5)
         btn_sizer.Add(cancel_button, 0, wx.ALL, 5)
         self.main_sizer.Add(btn_sizer, 0, wx.ALIGN_CENTER | wx.ALL, 5)
@@ -88,5 +116,9 @@ class SettingsDialog(wx.Dialog):
         self.config["model"] = self.model_ctrl.GetValue()
         self.config["ollama_model"] = self.ollama_model_ctrl.GetValue()
         self.config["shortcut"] = self.shortcut_ctrl.GetValue()
+        selected_lang_display = self.language_combo.GetValue()
+        self.config["language"] = self.reverse_language_map.get(
+            selected_lang_display, "en"
+        )
         config_manager.save_config(self.config)
         self.EndModal(wx.ID_OK)
