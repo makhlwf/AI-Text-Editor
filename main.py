@@ -52,6 +52,8 @@ set_translation_globals(config.get("language", "en"))
 TRAY_TOOLTIP = _("AI Text Editor")
 TRAY_ICON = resource_path("icon.png")
 
+wx.ID_RESTART = wx.NewIdRef()
+
 
 class MainApp(wx.App):
     def OnInit(self):
@@ -171,9 +173,11 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
     def CreatePopupMenu(self):
         menu = wx.Menu()
         menu.Append(wx.ID_ABOUT, _("Settings"))
+        menu.Append(wx.ID_RESTART, _("Restart"))
         menu.AppendSeparator()
         menu.Append(wx.ID_EXIT, _("Exit"))
         self.Bind(wx.EVT_MENU, self.on_settings, id=wx.ID_ABOUT)
+        self.Bind(wx.EVT_MENU, self.on_restart, id=wx.ID_RESTART)
         self.Bind(wx.EVT_MENU, self.on_exit, id=wx.ID_EXIT)
         return menu
 
@@ -183,6 +187,12 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
 
     def on_left_down(self, event):
         print("Tray icon left-clicked.")
+
+    def on_restart(self, event):
+        self.frame.Close()
+        wx.GetApp().hotkey_manager.stop()
+        os.execv(sys.executable, ["python"] + sys.argv)
+
 
     def on_settings(self, event):
         settings_dialog = ui.settings_dialog.SettingsDialog(self.frame, _)
@@ -199,14 +209,18 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
                 set_translation_globals(new_config["language"])
                 # Re-create the main frame or update all translatable strings
                 # For simplicity, we'll recreate the entire app for now.
-                wx.MessageBox(
-                    _(
-                        "Language changed. Please restart the application for full effect."
-                    ),
+                dlg = wx.MessageDialog(
+                    None,
+                    _("Language changed. Please restart the application for full effect."),
                     _("Restart Required"),
-                    wx.OK | wx.ICON_INFORMATION,
+                    wx.YES_NO | wx.ICON_INFORMATION,
                 )
-                self.frame.Close()
+                result = dlg.ShowModal()
+                dlg.Destroy()
+                if result == wx.ID_YES:
+                    self.on_restart(None)
+                else:
+                    self.frame.Close()
         settings_dialog.Destroy()
 
     def on_exit(self, event):

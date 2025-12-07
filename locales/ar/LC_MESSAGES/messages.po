@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-07 16:37+0200\n"
-"PO-Revision-Date: 2025-12-07 17:02+0200\n"
+"POT-Creation-Date: 2025-12-07 17:30+0200\n"
+"PO-Revision-Date: 2025-12-07 17:28+0200\n"
 "Last-Translator: \n"
-"Language-Team: ar <LL@li.org>\n"
 "Language: ar\n"
+"Language-Team: ar <LL@li.org>\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && "
-"n%100<=2 ? 4 : 5);\n"
 "Generated-By: Babel 2.17.0\n"
-"X-Generator: Poedit 3.8\n"
 
 #: ai_handler.py:20
 msgid "API key not found. Please set it in the settings."
@@ -28,57 +27,65 @@ msgstr "لم يتم العثور على مفتاح API. يرجى تعيينه ف
 msgid "Invalid AI provider selected."
 msgstr "تم تحديد مزود ذكاء اصطناعي غير صالح."
 
-#: ai_handler.py:49
+#: ai_handler.py:50
 msgid ""
-"Fix the grammar and structure of the following text. Only return the corrected text, without any other comments. "
-"Keep the original language."
-msgstr "أصلح القواعد النحوية وبنية النص التالي. أرجع النص المصحح فقط، بدون أي تعليقات أخرى. حافظ على اللغة الأصلية."
+"Fix the grammar and structure of the following text. Only return the "
+"corrected text, without any other comments. Keep the original language."
+msgstr ""
+"أصلح القواعد النحوية وبنية النص التالي. أرجع النص المصحح فقط، بدون أي "
+"تعليقات أخرى. حافظ على اللغة الأصلية."
 
-#: main.py:50 main.py:74 ui/options_dialog.py:7
+#: main.py:52 main.py:78 ui/options_dialog.py:7
 msgid "AI Text Editor"
 msgstr "AI Text Editor"
 
-#: main.py:74
+#: main.py:78
 msgid "No text found in the focused window."
 msgstr "لم يتم العثور على نص في النافذة المحددة."
 
-#: main.py:151
+#: main.py:155
 msgid "Processing..."
 msgstr "جارٍ المعالجة..."
 
-#: main.py:151
+#: main.py:156
 msgid "Please wait."
 msgstr "يرجى الانتظار."
 
-#: main.py:169 ui/settings_dialog.py:8
+#: main.py:175 ui/settings_dialog.py:8
 msgid "Settings"
 msgstr "الإعدادات"
 
-#: main.py:171
+#: main.py:176
+msgid "Restart"
+msgstr "إعادة التشغيل مطلوبة"
+
+#: main.py:178
 msgid "Exit"
 msgstr "خروج"
 
-#: main.py:198
+#: main.py:214
 msgid "Language changed. Please restart the application for full effect."
 msgstr "تم تغيير اللغة. يرجى إعادة تشغيل التطبيق لتفعيل التغييرات بالكامل."
 
-#: main.py:198
+#: main.py:215
 msgid "Restart Required"
 msgstr "إعادة التشغيل مطلوبة"
 
-#: ui/instruction_dialog.py:7 ui/options_dialog.py:14
+#: ui/instruction_dialog.py:8 ui/options_dialog.py:17
 msgid "Direct Instruction"
 msgstr "تعليمات مباشرة"
 
-#: ui/instruction_dialog.py:11
+#: ui/instruction_dialog.py:14
 msgid "Enter your instruction:"
 msgstr "أدخل تعليماتك:"
 
-#: ui/instruction_dialog.py:18 ui/options_dialog.py:22 ui/settings_dialog.py:80 ui/style_dialog.py:30
+#: ui/instruction_dialog.py:22 ui/options_dialog.py:26 ui/settings_dialog.py:90
+#: ui/style_dialog.py:30
 msgid "OK"
 msgstr "موافق"
 
-#: ui/instruction_dialog.py:19 ui/options_dialog.py:23 ui/settings_dialog.py:81 ui/style_dialog.py:31
+#: ui/instruction_dialog.py:23 ui/options_dialog.py:27 ui/settings_dialog.py:91
+#: ui/style_dialog.py:31
 msgid "Cancel"
 msgstr "إلغاء"
 
@@ -86,11 +93,11 @@ msgstr "إلغاء"
 msgid "Choose an option"
 msgstr "اختر خيارًا"
 
-#: ui/options_dialog.py:14
+#: ui/options_dialog.py:15
 msgid "Fix Grammar"
 msgstr "تصحيح القواعد"
 
-#: ui/options_dialog.py:14 ui/style_dialog.py:7
+#: ui/options_dialog.py:16 ui/style_dialog.py:7
 msgid "Change Style"
 msgstr "تغيير النمط"
 
@@ -118,15 +125,19 @@ msgstr "إعدادات Ollama"
 msgid "Language:"
 msgstr "اللغة:"
 
-#: ui/settings_dialog.py:57 ui/settings_dialog.py:58 ui/settings_dialog.py:61
+#: ui/settings_dialog.py:58 ui/settings_dialog.py:63 ui/settings_dialog.py:70
 msgid "English"
 msgstr "الإنجليزية"
 
-#: ui/settings_dialog.py:57 ui/settings_dialog.py:58
+#: ui/settings_dialog.py:59 ui/settings_dialog.py:64
 msgid "Spanish"
 msgstr "الإسبانية"
 
-#: ui/settings_dialog.py:72
+#: ui/settings_dialog.py:60 ui/settings_dialog.py:65
+msgid "Arabic"
+msgstr "العربية"
+
+#: ui/settings_dialog.py:82
 msgid "Shortcut:"
 msgstr "الاختصار:"
 
@@ -161,3 +172,4 @@ msgstr "مضحك"
 #: ui/style_dialog.py:21
 msgid "Social post"
 msgstr "منشور عبر الانترنت"
+

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-07 16:37+0200\n"
+"POT-Creation-Date: 2025-12-07 17:30+0200\n"
 "PO-Revision-Date: 2025-12-07 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -26,58 +26,62 @@ msgstr ""
 msgid "Invalid AI provider selected."
 msgstr ""
 
-#: ai_handler.py:49
+#: ai_handler.py:50
 msgid ""
 "Fix the grammar and structure of the following text. Only return the "
 "corrected text, without any other comments. Keep the original language."
 msgstr ""
 
-#: main.py:50 main.py:74 ui/options_dialog.py:7
+#: main.py:52 main.py:78 ui/options_dialog.py:7
 msgid "AI Text Editor"
 msgstr ""
 
-#: main.py:74
+#: main.py:78
 msgid "No text found in the focused window."
 msgstr ""
 
-#: main.py:151
+#: main.py:155
 msgid "Processing..."
 msgstr ""
 
-#: main.py:151
+#: main.py:156
 msgid "Please wait."
 msgstr ""
 
-#: main.py:169 ui/settings_dialog.py:8
+#: main.py:175 ui/settings_dialog.py:8
 msgid "Settings"
 msgstr ""
 
-#: main.py:171
+#: main.py:176
+msgid "Restart"
+msgstr ""
+
+#: main.py:178
 msgid "Exit"
 msgstr ""
 
-#: main.py:198
+#: main.py:214
 msgid "Language changed. Please restart the application for full effect."
 msgstr ""
 
-#: main.py:198
+#: main.py:215
 msgid "Restart Required"
 msgstr ""
 
-#: ui/instruction_dialog.py:7 ui/options_dialog.py:14
+#: ui/instruction_dialog.py:8 ui/options_dialog.py:17
 msgid "Direct Instruction"
 msgstr ""
 
-#: ui/instruction_dialog.py:11
+#: ui/instruction_dialog.py:14
 msgid "Enter your instruction:"
 msgstr ""
 
-#: ui/instruction_dialog.py:18 ui/options_dialog.py:22 ui/settings_dialog.py:80
+#: ui/instruction_dialog.py:22 ui/options_dialog.py:26 ui/settings_dialog.py:90
 #: ui/style_dialog.py:30
 msgid "OK"
 msgstr ""
 
-#: ui/instruction_dialog.py:19 ui/options_dialog.py:23 ui/settings_dialog.py:81
+#: ui/instruction_dialog.py:23 ui/options_dialog.py:27 ui/settings_dialog.py:91
 #: ui/style_dialog.py:31
 msgid "Cancel"
 msgstr ""
@@ -86,11 +90,11 @@ msgstr ""
 msgid "Choose an option"
 msgstr ""
 
-#: ui/options_dialog.py:14
+#: ui/options_dialog.py:15
 msgid "Fix Grammar"
 msgstr ""
 
-#: ui/options_dialog.py:14 ui/style_dialog.py:7
+#: ui/options_dialog.py:16 ui/style_dialog.py:7
 msgid "Change Style"
 msgstr ""
 
@@ -118,15 +122,19 @@ msgstr ""
 msgid "Language:"
 msgstr ""
 
-#: ui/settings_dialog.py:57 ui/settings_dialog.py:58 ui/settings_dialog.py:61
+#: ui/settings_dialog.py:58 ui/settings_dialog.py:63 ui/settings_dialog.py:70
 msgid "English"
 msgstr ""
 
-#: ui/settings_dialog.py:57 ui/settings_dialog.py:58
+#: ui/settings_dialog.py:59 ui/settings_dialog.py:64
 msgid "Spanish"
 msgstr ""
 
-#: ui/settings_dialog.py:72
+#: ui/settings_dialog.py:60 ui/settings_dialog.py:65
+msgid "Arabic"
+msgstr ""
+
+#: ui/settings_dialog.py:82
 msgid "Shortcut:"
 msgstr ""
 

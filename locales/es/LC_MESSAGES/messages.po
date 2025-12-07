@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-07 16:37+0200\n"
+"POT-Creation-Date: 2025-12-07 17:30+0200\n"
 "PO-Revision-Date: 2025-12-07 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -26,58 +26,66 @@ msgstr "Clave de API no encontrada. Por favor, configúrela en los ajustes."
 msgid "Invalid AI provider selected."
 msgstr "Proveedor de IA no válido seleccionado."
 
-#: ai_handler.py:49
+#: ai_handler.py:50
 msgid ""
 "Fix the grammar and structure of the following text. Only return the "
 "corrected text, without any other comments. Keep the original language."
-msgstr "Corregir la gramática y estructura del siguiente texto. Devuelve solo el texto corregido, sin comentarios adicionales. Mantén el idioma original."
+msgstr ""
+"Corregir la gramática y estructura del siguiente texto. Devuelve solo el "
+"texto corregido, sin comentarios adicionales. Mantén el idioma original."
 
-#: main.py:50 main.py:74 ui/options_dialog.py:7
+#: main.py:52 main.py:78 ui/options_dialog.py:7
 msgid "AI Text Editor"
 msgstr "Editor de Texto con IA"
 
-#: main.py:74
+#: main.py:78
 msgid "No text found in the focused window."
 msgstr "No se encontró texto en la ventana enfocada."
 
-#: main.py:151
+#: main.py:155
 msgid "Processing..."
 msgstr "Procesando..."
 
-#: main.py:151
+#: main.py:156
 msgid "Please wait."
 msgstr "Por favor, espera."
 
-#: main.py:169 ui/settings_dialog.py:8
+#: main.py:175 ui/settings_dialog.py:8
 msgid "Settings"
 msgstr "Ajustes"
 
-#: main.py:171
+#: main.py:176
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: main.py:178
 msgid "Exit"
 msgstr "Salir"
 
-#: main.py:198
+#: main.py:214
 msgid "Language changed. Please restart the application for full effect."
-msgstr "Idioma cambiado. Por favor, reinicie la aplicación para que los cambios surtan efecto."
+msgstr ""
+"Idioma cambiado. Por favor, reinicie la aplicación para que los cambios "
+"surtan efecto."
 
-#: main.py:198
+#: main.py:215
 msgid "Restart Required"
 msgstr "Reinicio Requerido"
 
-#: ui/instruction_dialog.py:7 ui/options_dialog.py:14
+#: ui/instruction_dialog.py:8 ui/options_dialog.py:17
 msgid "Direct Instruction"
 msgstr "Instrucción Directa"
 
-#: ui/instruction_dialog.py:11
+#: ui/instruction_dialog.py:14
 msgid "Enter your instruction:"
 msgstr "Introduce tu instrucción:"
 
-#: ui/instruction_dialog.py:18 ui/options_dialog.py:22 ui/settings_dialog.py:80
+#: ui/instruction_dialog.py:22 ui/options_dialog.py:26 ui/settings_dialog.py:90
 #: ui/style_dialog.py:30
 msgid "OK"
 msgstr "Aceptar"
 
-#: ui/instruction_dialog.py:19 ui/options_dialog.py:23 ui/settings_dialog.py:81
+#: ui/instruction_dialog.py:23 ui/options_dialog.py:27 ui/settings_dialog.py:91
 #: ui/style_dialog.py:31
 msgid "Cancel"
 msgstr "Cancelar"
@@ -86,11 +94,11 @@ msgstr "Cancelar"
 msgid "Choose an option"
 msgstr "Elige una opción"
 
-#: ui/options_dialog.py:14
+#: ui/options_dialog.py:15
 msgid "Fix Grammar"
 msgstr "Corregir Gramática"
 
-#: ui/options_dialog.py:14 ui/style_dialog.py:7
+#: ui/options_dialog.py:16 ui/style_dialog.py:7
 msgid "Change Style"
 msgstr "Cambiar Estilo"
 
@@ -118,15 +126,19 @@ msgstr "Configuración de Ollama"
 msgid "Language:"
 msgstr "Idioma:"
 
-#: ui/settings_dialog.py:57 ui/settings_dialog.py:58 ui/settings_dialog.py:61
+#: ui/settings_dialog.py:58 ui/settings_dialog.py:63 ui/settings_dialog.py:70
 msgid "English"
 msgstr "Inglés"
 
-#: ui/settings_dialog.py:57 ui/settings_dialog.py:58
+#: ui/settings_dialog.py:59 ui/settings_dialog.py:64
 msgid "Spanish"
 msgstr "Español"
 
-#: ui/settings_dialog.py:72
+#: ui/settings_dialog.py:60 ui/settings_dialog.py:65
+msgid "Arabic"
+msgstr "Árabe"
+
+#: ui/settings_dialog.py:82
 msgid "Shortcut:"
 msgstr "Atajo:"
 
@@ -161,3 +173,4 @@ msgstr "Divertido"
 #: ui/style_dialog.py:21
 msgid "Social post"
 msgstr "Publicación social"
+
