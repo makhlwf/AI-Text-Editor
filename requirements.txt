@@ -4,3 +4,4 @@ keyboard
 pywin32
 ollama
 uiautomation
+requests

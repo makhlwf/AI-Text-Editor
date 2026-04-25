@@ -3,7 +3,7 @@ name = "ai-text-editor"
 version = "0.1.0"
 description = "Ai text editor"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
     "google-generativeai>=0.8.5",
     "keyboard>=0.13.5",

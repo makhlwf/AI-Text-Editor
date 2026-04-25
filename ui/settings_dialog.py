@@ -15,7 +15,7 @@ class SettingsDialog(wx.Dialog):
         provider_label = wx.StaticText(self.panel, label=self._("AI Provider:"))
         self.provider_combo = wx.ComboBox(
             self.panel,
-            choices=["gemini", "ollama"],
+            choices=["gemini", "ollama", "llama_cpp"],
             value=self.config.get("ai_provider", "gemini"),
             style=wx.CB_READONLY,
         )
@@ -51,6 +51,27 @@ class SettingsDialog(wx.Dialog):
         self.ollama_settings_sizer.Add(ollama_model_label, 0, wx.ALL, 5)
         self.ollama_settings_sizer.Add(self.ollama_model_ctrl, 0, wx.EXPAND | wx.ALL, 5)
         self.main_sizer.Add(self.ollama_settings_sizer, 0, wx.EXPAND | wx.ALL, 5)
+
+        # llama_cpp Settings
+        self.llama_cpp_settings_sizer = wx.StaticBoxSizer(
+            wx.StaticBox(self.panel, label=self._("llama.cpp Settings")), wx.VERTICAL
+        )
+        llama_cpp_url_label = wx.StaticText(self.panel, label=self._("Server URL:"))
+        self.llama_cpp_url_ctrl = wx.TextCtrl(
+            self.panel,
+            value=self.config.get("llama_cpp_url", "http://localhost:8080/v1"),
+        )
+        llama_cpp_model_label = wx.StaticText(self.panel, label=self._("Model:"))
+        self.llama_cpp_model_ctrl = wx.TextCtrl(
+            self.panel, value=self.config.get("llama_cpp_model", "local-model")
+        )
+        self.llama_cpp_settings_sizer.Add(llama_cpp_url_label, 0, wx.ALL, 5)
+        self.llama_cpp_settings_sizer.Add(self.llama_cpp_url_ctrl, 0, wx.EXPAND | wx.ALL, 5)
+        self.llama_cpp_settings_sizer.Add(llama_cpp_model_label, 0, wx.ALL, 5)
+        self.llama_cpp_settings_sizer.Add(
+            self.llama_cpp_model_ctrl, 0, wx.EXPAND | wx.ALL, 5
+        )
+        self.main_sizer.Add(self.llama_cpp_settings_sizer, 0, wx.EXPAND | wx.ALL, 5)
 
         # Language Selection
         language_label = wx.StaticText(self.panel, label=self._("Language:"))
@@ -105,8 +126,9 @@ class SettingsDialog(wx.Dialog):
 
     def update_provider_settings(self):
         provider = self.provider_combo.GetValue()
-        self.gemini_settings_sizer.GetStaticBox().Show(provider == "gemini")
-        self.ollama_settings_sizer.GetStaticBox().Show(provider == "ollama")
+        self.main_sizer.Show(self.gemini_settings_sizer, provider == "gemini", recursive=True)
+        self.main_sizer.Show(self.ollama_settings_sizer, provider == "ollama", recursive=True)
+        self.main_sizer.Show(self.llama_cpp_settings_sizer, provider == "llama_cpp", recursive=True)
         self.panel.Layout()
         self.main_sizer.Fit(self)
 
@@ -115,6 +137,8 @@ class SettingsDialog(wx.Dialog):
         self.config["api_key"] = self.api_key_ctrl.GetValue()
         self.config["model"] = self.model_ctrl.GetValue()
         self.config["ollama_model"] = self.ollama_model_ctrl.GetValue()
+        self.config["llama_cpp_url"] = self.llama_cpp_url_ctrl.GetValue()
+        self.config["llama_cpp_model"] = self.llama_cpp_model_ctrl.GetValue()
         self.config["shortcut"] = self.shortcut_ctrl.GetValue()
         selected_lang_display = self.language_combo.GetValue()
         self.config["language"] = self.reverse_language_map.get(

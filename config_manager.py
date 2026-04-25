@@ -13,6 +13,8 @@ def get_config():
             "ai_provider": "gemini",
             "ollama_model": "gemma3",
             "language": "en",
+            "llama_cpp_url": "http://localhost:8080/v1",
+            "llama_cpp_model": "local-model",
         }
     with open(CONFIG_FILE, "r") as f:
         config = json.load(f)
@@ -24,6 +26,10 @@ def get_config():
             config["ollama_model"] = "gemma3"
         if "language" not in config:
             config["language"] = "en"
+        if "llama_cpp_url" not in config:
+            config["llama_cpp_url"] = "http://localhost:8080/v1"
+        if "llama_cpp_model" not in config:
+            config["llama_cpp_model"] = "local-model"
         return config
 
 
